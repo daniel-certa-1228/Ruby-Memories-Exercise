@@ -9,17 +9,15 @@ class Margaret
 			if margaret_arg.empty?
 				raise ArgumentError, "You must pass an argument to post a message."
 			end #end check
-			
+
 			margaret_arg = margaret_arg.join(" ")
 
 			marge = File.open('messages.yaml', 'r+')
 			temp_hash = YAML::load(marge)
 			
-			temp_hash.each do |person, messages|
-				if (person == "Margaret")
-					messages.push(margaret_arg)
-				end
-			end
+			marge_array = temp_hash.fetch('Margaret')
+			marge_array.push(margaret_arg)
+
 			marge.rewind
 			marge.puts YAML::dump(temp_hash)
 			marge.close
