@@ -2,18 +2,31 @@ require "yaml"
 
 class Margaret
 
-	margaret_arg = ARGV.join(" ")
-	# puts margaret_arg.to_s
-	marge = File.open('messages.yaml', 'r+')
-	temp_hash = YAML::load(marge)
-	
-	temp_hash.each do |person, messages|
-		if (person == "Margaret")
-			messages.push(margaret_arg)
+	def self.message_cycle
+		begin
+			margaret_arg = ARGV
+			# Checks to see if an arguemt has been passed
+			if margaret_arg.empty?
+				raise ArgumentError, "You must pass an argument to post a message."
+			end #end check
+			
+			margaret_arg = margaret_arg.join(" ")
+
+			marge = File.open('messages.yaml', 'r+')
+			temp_hash = YAML::load(marge)
+			
+			temp_hash.each do |person, messages|
+				if (person == "Margaret")
+					messages.push(margaret_arg)
+				end
+			end
+			marge.rewind
+			marge.puts YAML::dump(temp_hash)
+			marge.close
+			#rescue for ArgumentError
+			rescue ArgumentError => e
+				puts "#{e.message}"
 		end
 	end
-	# puts temp_hash
-	marge.rewind
-	marge.puts YAML::dump(temp_hash)
-	marge.close
+	self.message_cycle
 end
