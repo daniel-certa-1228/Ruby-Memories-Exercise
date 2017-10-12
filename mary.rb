@@ -9,7 +9,6 @@ class Mary
 			if mary_arg.empty?
 				raise ArgumentError, "You must pass an argument to post a message."
 			end #end check
-
 			mary_arg = mary_arg.join(" ")
 			# puts mary_arg.to_s
 			mary = File.open('messages.yaml', 'r+')
