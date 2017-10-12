@@ -16,6 +16,7 @@ class Margaret
 			temp_hash = YAML::load(marge)
 			
 			marge_array = temp_hash.fetch('Margaret')
+	
 			marge_array.push(margaret_arg)
 
 			marge.rewind
@@ -23,6 +24,8 @@ class Margaret
 			marge.close
 			#rescue for ArgumentError
 			rescue ArgumentError => e
+				puts "#{e.message}"
+			rescue KeyError => e
 				puts "#{e.message}"
 		end
 	end

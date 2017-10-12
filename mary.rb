@@ -24,7 +24,8 @@ class Mary
 			#rescue for ArgumentError
 			rescue ArgumentError => e
 				puts "#{e.message}"
-
+			rescue KeyError => e
+				puts "#{e.message}"
 		end
 	end
 	self.message_cycle
