@@ -26,6 +26,8 @@ class Mary
 				puts "#{e.message}"
 			rescue KeyError => e
 				puts "#{e.message}"
+			rescue EOFError => e
+				puts "#{e.message}"
 		end
 	end
 	self.message_cycle
